@@ -1,6 +1,6 @@
 {
   "name": "react-jss-hmr",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Hot module replacement for react-jss",
   "main": "lib/index.js",
   "engines": {
@@ -38,7 +38,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/felthy/react-jss-hmr.git"
+    "url": "https://github.com/cssinjs/react-jss-hmr.git"
   },
   "keywords": [
     "react",
@@ -52,9 +52,9 @@
   "author": "Pete Feltham <dev@felthy.com> (http://github.com/felthy)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/felthy/react-jss-hmr/issues"
+    "url": "https://github.com/cssinjs/react-jss-hmr/issues"
   },
-  "homepage": "https://github.com/felthy/react-jss-hmr",
+  "homepage": "https://github.com/cssinjs/react-jss-hmr",
   "peerDependencies": {
     "react": ">=15",
     "react-jss": "^8.6.0"
