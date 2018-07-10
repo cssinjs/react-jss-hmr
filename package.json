@@ -110,6 +110,7 @@
     "dist",
     "readme.md",
     "changelog.md",
-    "LICENSE"
+    "LICENSE",
+    "webpack.js"
   ]
 }
