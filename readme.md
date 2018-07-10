@@ -31,6 +31,9 @@ module.exports = {
 }
 ```
 
+> **⚠️ NOTE:** the plugin is added to the `resolve` section in the webpack config, not the main 
+> `plugins` section!
+
 Now you should be able to tweak the CSS rules in your `injectSheet()` calls and see the changes 
 reflected in your browser without reloading.
 
