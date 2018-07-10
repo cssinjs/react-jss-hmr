@@ -1,7 +1,7 @@
-const expect = require('expect.js')
-const {ResolverFactory} = require('enhanced-resolve')
-const MemoryFileSystem = require('memory-fs')
-const ReactJssHmrPlugin = require('../webpack')
+import expect from 'expect.js'
+import {ResolverFactory} from 'enhanced-resolve'
+import MemoryFileSystem from 'memory-fs'
+import ReactJssHmrPlugin from '../webpack'
 
 describe('The Webpack resolve plugin', () => {
   let resolver
