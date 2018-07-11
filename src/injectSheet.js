@@ -1,7 +1,6 @@
 import defaultInjectSheet from 'react-jss'
 
 const managers = {}
-const dynamicSheets = new WeakMap()
 
 function getDisplayName(Component) {
   const displayName = Component.displayName || Component.name
@@ -51,16 +50,7 @@ export default process.env.NODE_ENV !== 'production'
           const isHmrUpdate = prevManager && prevManager !== manager
           if (isHmrUpdate) {
             prevManager.unmanage(this.state.theme)
-            const prevDynamicSheet = dynamicSheets.get(this)
-            if (prevDynamicSheet) {
-              prevDynamicSheet.detach()
-              dynamicSheets.delete(this)
-            }
-
             managers[key] = manager
-          }
-          if (this.state.dynamicSheet) {
-            dynamicSheets.set(this, this.state.dynamicSheet)
           }
           if (!isHmrUpdate || prevState.dynamicSheet) {
             // don't call when we don't have a previous dynamic sheet, otherwise it will throw if we
