@@ -1,33 +1,25 @@
 import defaultInjectSheet from 'react-jss'
 
-const managers = {}
-
-function getDisplayName(Component) {
-  const displayName = Component.displayName || Component.name
-  return displayName && displayName !== 'ReactComponent'
-    ? displayName
-    : 'Component'
-}
+const managers = new WeakMap()
 
 export default process.env.NODE_ENV !== 'production'
   ? function injectSheet(...rest) {
     const createHoc = defaultInjectSheet.apply(this, rest)
     return (InnerComponent) => {
       const Jss = createHoc(InnerComponent)
-      const key = getDisplayName(Jss)
 
       class HotJss extends Jss {
         componentWillMount() {
           // Note: this will never be called during hot module replacement, so we can
           // use it as a place to store away the SheetManager
           super.componentWillMount()
-          managers[key] = this.manager
+          managers.set(Object.getPrototypeOf(this), this.manager)
         }
 
         componentWillReceiveProps(nextProps, nextContext) {
           super.componentWillReceiveProps(nextProps, nextContext)
 
-          const prevManager = managers[key]
+          const prevManager = managers.get(Object.getPrototypeOf(this))
           const manager = this.manager
           if (prevManager !== manager) {
             // If the manager changed between mounting and updating, it was probably due to hot
@@ -42,7 +34,8 @@ export default process.env.NODE_ENV !== 'production'
         }
 
         componentDidUpdate(prevProps, prevState) {
-          const prevManager = managers[key]
+          const key = Object.getPrototypeOf(this)
+          const prevManager = managers.get(key)
           const manager = this.manager
           // If the manager changed between mounting and updating, it was probably due to hot module
           // replacement.
@@ -50,7 +43,7 @@ export default process.env.NODE_ENV !== 'production'
           const isHmrUpdate = prevManager && prevManager !== manager
           if (isHmrUpdate) {
             prevManager.unmanage(this.state.theme)
-            managers[key] = manager
+            managers.set(key, manager)
           }
           if (!isHmrUpdate || prevState.dynamicSheet) {
             // don't call when we don't have a previous dynamic sheet, otherwise it will throw if we
