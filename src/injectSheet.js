@@ -3,6 +3,7 @@ import defaultInjectSheet from 'react-jss'
 const managers = new WeakMap()
 
 if (process.env.NODE_ENV === 'production') {
+  // eslint-disable-next-line no-console
   console.error('react-jss-hmr should never be used in production!')
 }
 
