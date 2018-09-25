@@ -19,7 +19,7 @@
  */
 export default class ReactJssHmrPlugin {
   apply(resolver) { // eslint-disable-line class-methods-use-this
-    resolver.plugin('described-resolve', (request, callback) => {
+    resolver.hooks.resolve.tapAsync('described-resolve', (request, resolverContext, callback) => {
       if (process.env.NODE_ENV !== 'production' &&
           request.request === 'react-jss' &&
           request.context &&
@@ -30,9 +30,10 @@ export default class ReactJssHmrPlugin {
           request: 'react-jss-hmr'
         })
         return resolver.doResolve(
-          'resolve',
+          resolver.hooks.resolve,
           aliasedRequest,
           'aliased react-jss to react-jss-hmr',
+          resolverContext,
           callback
         )
       }
