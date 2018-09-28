@@ -2,7 +2,7 @@
 
 React-JSS-HMR enhances [react-jss][1] to support hot CSS updates in conjunction with [react-hot-loader][2].
 
-## ⚠️ Do you really need this?
+## 🤔 Do you really need this?
 
 Hot reloading is possible (and much simpler) without this package. This package is **only**
 necessary if you are using react-hot-loader. And, you probably don’t need react-hot-loader
